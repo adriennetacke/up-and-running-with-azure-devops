@@ -1,0 +1,81 @@
+/**
+ * Custom overridden Azure theme for Azure Automation: The Good Parts
+ *
+ * By Adrienne Tacke https://www.adrienne.io
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(../../lib/font/Staatliches/Staatliches.css);
+@import url(../../lib/font/fira-code/fira-code.css);
+
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #011514;
+
+$mainColor: #ffffff;
+$headingColor: #ffffff;
+
+$mainFontSize: 80px;
+$mainFont: 'Fira Code', Helvetica, sans-serif;
+$headingFont: 'Staatliches', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 600;
+$linkColor: #42affa;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: lighten( $linkColor, 25% );
+
+$heading1Size: 1.8em;
+$heading2Size: 1.5em;
+$heading3Size: 1.2em;
+$heading4Size: 1.0em;
+
+section.has-light-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #222;
+	}
+}
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+
+// Adrienne custom classes ------------------------------
+.title {
+  p {
+    margin: 0;
+  }
+}
+
+.emphasis {
+  color: #09baae;
+  text-decoration: overline;
+}
+.smaller {
+  font-size: .7em;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+img {
+  border: none !important;
+  margin: 15px !important;
+  box-shadow: none !important;
+  background:none!important;
+}
+// ---------------------------------------------

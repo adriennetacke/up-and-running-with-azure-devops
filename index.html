@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Up and Running with Azure DevOps</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/azure.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="title" data-background-color="#333333" data-background-image="./assets/cover-template.jpg" data-background-image-size="cover" data-background-opacity="0.8">
+					<h1>Up and Running with <span class="emphasis">Azure DevOps</span></h1>
+					<div style="display:flex;flex-direction:column;justify-content:flex-end;align-items:center;margin-top:50px;">
+						<p style="display:flex;justify-content:center;align-items:center;font-size:.7em;">
+							<img src="./assets/twitter-logo.png" style="margin:0!important;" width="60px"/>
+							<span>adriennetacke</span>
+						</p>
+						<p style="display:flex;justify-content:center;align-items:center;font-size:.5em;">
+							<span>Senior Developer Advocate</span>
+							<img src="./assets/mongo-logo-white.svg" width="200px"/>
+						</p>
+					</div>
+					
+				</section>
+				<section>
+					<h2 style="font-style: italic;">"We <span class="emphasis">lost the client</span>."</h2>
+					<p class="fragment fade-in">- CEO</p>
+				</section>
+				<section data-transition="fade" data-transition-speed="slow">
+					<h2>Existing Process</h2>
+					<div class="row smaller">
+						<span class="fragment fade-in">Code </span>
+						<span class="fragment fade-in" style="padding: 0 50px;"> ➡ </span>
+						<span class="fragment fade-in">Open PR </br>(feat -> master) </span>
+						<span class="fragment fade-in">➡ </span>
+						<span class="fragment fade-in">Code Review (optional)</span>
+						<span class="fragment fade-in">➡ </span>
+						<span class="fragment fade-in">Merged into master </span>
+						<span class="fragment fade-in" style="transform:translateX(30px)">➡ </span>
+					</div>
+				</section>
+				<section data-transition="fade"  data-transition-speed="slow">
+					<h2>Existing Process</h2>
+					<div class="row smaller">
+						<span style="transform:translateX(-30px)">➡ </span>
+						<span class="fragment fade-in" style="padding: 0 50px;">Testing </br>(superficially, if at all) </span>
+						<span class="fragment fade-in" style="padding: 0 50px;"> ➡ </span>
+						<span class="fragment fade-in" style="padding: 0 25px;">Ctrl + C, Ctrl + V </span>
+						<span class="fragment fade-in" style="padding: 0 50px;"> ➡ </span>
+						<span class="fragment fade-in" style="padding: 0 250px;"> <h1>😨</h1></span>
+					</div>
+				</section>
+				<section>
+					<h2>But what about:</h2>
+					<span class="fragment fade-in"><p>Reliability?</p></span>
+					<span class="fragment fade-in"><p>Speed?</p></span>
+				</section>
+				<section>
+					<h2 style="font-style: italic;">"It's too <span class="emphasis">complicated</span> to set up."</h2>
+					<p class="fragment fade-in">- Senior Engineer</p>
+				</section>
+				<section data-transition="slide-up">
+					<h2 style="font-style: italic;">"I don't want to learn yet <span class="emphasis">another language</span> just for configuration."</h2>
+					<p class="fragment fade-in">- Colleagues (& Me, honestly)</p>
+				</section>
+				<section data-transition="slide-up">
+					<h2 style="font-style: italic;">"We can't automate <span class="emphasis">everything</span>!"</h2>
+					<p class="fragment fade-in">- Manager</p>
+				</section>
+				<section>
+					Which steps do we automate?
+				</section>
+				<section>
+					Which steps <span class="emphasis">CAN</span> we automate?
+				</section>
+				<section>
+					What do we <span class="emphasis">want</span> our process to look like?
+				</section>
+				<section data-transition="fade" data-transition-speed="slow">
+					<div class="row smaller">
+						<span>Code </span>
+						<span style="padding: 0 50px;"> ➡ </span>
+						<span >Open PR (feature -> <span class="fragment fade-in emphasis">dev</span>) </span>
+						<span style="padding: 0 50px;">➡ </span>
+						<span class="fragment fade-in emphasis">Auto-Add Reviewers</span>
+					</div>
+				</section>
+				<section data-transition="slide" data-transition-speed="slow">
+					<div class="row smaller">
+						<span style="padding: 0 50px;">➡ </span>
+						<span class="fragment fade-in emphasis">Run Pre-Build</span>
+						<span style="padding: 0 50px;">➡ </span>
+						<span >Code Review </br>(<span class="fragment fade-in emphasis">policies!</span>)</span>
+						<span style="padding: 0 50px;">➡ </span>
+						<span class="fragment fade-in"><span class="emphasis">Trigger</span> dev build</span>
+						<span style="transform:translateX(30px)">➡ </span>
+					</div>
+				</section>
+				<section data-transition="slide" data-transition-speed="slow">
+					<div class="row smaller">
+						<span style="transform:translateX(-30px)">➡ </span>
+						<span class="fragment fade-in"><span class="emphasis">Deploy</span> to dev</span>
+						<span style="padding: 0 50px;"> ➡ </span>
+						<span style="padding: 0 50px;">(dev -> master) </span>
+						<span style="padding: 0 50px;"> .. </span>
+						<span style="padding: 0 50px;" class="fragment fade-in"><span class="emphasis">Trigger</span> QA build </span>
+						<span style="padding: 0 50px;"> ➡ </span>
+						<span style="padding: 0 50px;" class="fragment fade-in"><span class="emphasis">Deploy</span> to QA </span>
+						<span style="transform:translateX(30px)">➡ </span>
+					</div>
+				</section>
+				<section data-transition="slide" data-transition-speed="slow">
+					<div class="row smaller">
+						<span style="transform:translateX(-30px)">➡ </span>
+						<span class="fragment fade-in emphasis">QA Approval </span>
+						<span style="padding: 0 50px;"> ➡ </span>
+						<span class="fragment fade-in emphasis">Final Approval </span>
+						<span style="padding: 0 50px;"> ➡ </span>
+						<span>Deploy to Prod </span>
+						<span style="padding: 0 50px;"> ➡ </span>
+					</div>
+				</section>
+				<section><h1>😃</h1></section>
+				<section data-background-color="#fff">
+					<h1>It <span class="emphasis">shouldn't</span> be that complicated...</h1>
+					<span class="fragment fade-in">(and it isn't!)</span>
+				</section>
+				<section data-background-color="#fff">
+					<h2 style="display:flex;align-items:center;justify-content:center;">"Hello." - <img src="./assets/azure-pipelines-logo.png" height="200px"/></h2>
+				</section>
+				<section data-background-image="./assets/that-was-easy.gif"></section>
+				<section>
+					<h1>Kiitos paljon!</h1>
+					<div style="display:flex;flex-direction:column;justify-content:flex-end;align-items:center;margin-top:50px;">
+						<p style="display:flex;justify-content:center;align-items:center;font-size:.7em;">
+							<img src="./assets/twitter-logo.png" style="margin:0!important;" width="60px"/>
+							<span>adriennetacke</span>
+						</p>
+						<p style="display:flex;justify-content:center;align-items:center;font-size:.5em;">
+							<span>Senior Developer Advocate</span>
+							<img src="./assets/mongo-logo-white.svg" width="200px"/>
+						</p>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
